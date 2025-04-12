@@ -1,0 +1,79 @@
+volumes:
+  client_service_production_postgres_data: {}
+  client_service_production_postgres_data_backups: {}
+  client_service_production_django_media: {}
+
+  client_service_production_redis_data: {}
+  # client_service_mongodb_data: {}  
+
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+
+    image: apps_production_django
+    volumes:
+      # - client_service_production_django_media:/app/media
+      # - client_service_production_django_media:/app/staticfiles
+      - /abis_media_static/api.al-beruniy.uz/media:/app/media
+      - /abis_media_static/api.al-beruniy.uz/static:/app/staticfiles
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+    ports:
+      - 8001:5000
+    networks:
+      - default
+      - inner
+      
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: apps_production_postgres
+    volumes:
+      - client_service_production_postgres_data:/var/lib/postgresql/data
+      - client_service_production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+    networks:
+      - default
+      - inner
+
+  redis:
+    image: docker.io/redis:6
+
+    volumes:
+      - client_service_production_redis_data:/data
+    networks:
+      - default
+      - inner
+
+  celeryworker:
+    <<: *django
+    image: apps_production_celeryworker
+    command: /start-celeryworker
+    ports: [ ]
+    networks:
+      - default
+      - inner
+
+  celerybeat:
+    <<: *django
+    image: apps_production_celerybeat
+    command: /start-celerybeat
+    ports: [ ]
+    networks:
+      - default
+      - inner
+      
+networks:
+    inner:
+        name: inner-network
+        driver: bridge
