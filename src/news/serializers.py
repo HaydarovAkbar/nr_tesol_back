@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, About
+from .models import News
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -11,9 +11,3 @@ class NewsSerializer(serializers.ModelSerializer):
         response = super(NewsSerializer, self).to_representation(instance)
         response['published_at'] = instance.published_at.strftime('%Y-%m-%d %H:%M') if instance.published_at else None
         return response
-
-
-class AboutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = About
-        fields = ('id', 'title', 'content', 'image')

@@ -111,9 +111,9 @@ MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
 MODELTRANSLATION_FALLBACK_LANGUAGES = ('uz', 'en', 'ru')
 
 MODELTRANSLATION_TRANSLATION_FILES = (
-    # 'app.translation.translate',
-    # 'utils.translation.translate',
-    # 'news.translation.translate',
+    'cours.translation.translate',
+    'utils.translation.translate',
+    'news.translation.translate',
     'tesol.translation.translate',
 )
 
