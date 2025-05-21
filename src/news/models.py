@@ -9,6 +9,7 @@ class News(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, verbose_name='UUID [uuid]')
     title = models.CharField(max_length=255, verbose_name=_("To'liq nomi [title]"))
     content = models.TextField(verbose_name='Tarkibi [content]', null=True, blank=True)
+    image = models.ImageField(upload_to='images', verbose_name='Tarkibi [image]', null=True, blank=True)
 
     is_active = models.BooleanField(default=True, verbose_name='Holati [is_active]')
 
@@ -27,25 +28,6 @@ class News(models.Model):
             models.Index(fields=['uuid', 'is_active']),
             models.Index(fields=['title']),
         ]
-
-
-class NewsImage(models.Model):
-    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='images', verbose_name='Yangilik [news]')
-    image = models.ImageField(upload_to='news', verbose_name='Rasm [image]', null=True, blank=True)
-
-    def __str__(self):
-        return self.news.title
-
-    def get_image_url(self):
-        try:
-            return settings.HOST + self.image.url
-        except:
-            return ''
-
-    class Meta:
-        verbose_name_plural = _('Yangiliklar rasmlari')
-        verbose_name = _('Yangilik rasmi')
-        db_table = 'news_images'
 
 
 class About(models.Model):

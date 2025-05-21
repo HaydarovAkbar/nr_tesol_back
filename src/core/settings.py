@@ -13,11 +13,14 @@ SECRET_KEY = 'django-insecure-reuy-jgd^ecq&-sv%@*j^p!l(een^w4d+9e@3_6#cny+-ml2hb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_ckeditor_5',
+    'modeltranslation',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +38,8 @@ INSTALLED_APPS = [
     'utils',
     'news',
     'tesol',
+    # 'ckeditor',
+    # 'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -106,9 +111,10 @@ MODELTRANSLATION_LANGUAGES = ('uz', 'en', 'ru')
 MODELTRANSLATION_FALLBACK_LANGUAGES = ('uz', 'en', 'ru')
 
 MODELTRANSLATION_TRANSLATION_FILES = (
-    'app.translation.translate',
-    'utils.translation.translate',
-    'news.translation.translate',
+    # 'app.translation.translate',
+    # 'utils.translation.translate',
+    # 'news.translation.translate',
+    'tesol.translation.translate',
 )
 
 LANGUAGE_CODE = 'en-us'
@@ -137,12 +143,16 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'static'
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'localhost'
+HOST = 'https://90d8-213-230-69-88.ngrok-free.app'
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = [HOST]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -160,4 +170,110 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "ALGORITHM": "HS256",
     "SIGNING_KEY": SECRET_KEY,
+}
+
+# CKEDITOR_5_CONFIGS = {
+#     'default': {
+#         'toolbar': [
+#             ['heading', '|', 'bold', 'italic', 'link'],
+#             ['bulletedList', 'numberedList', '|', 'outdent', 'indent'],
+#             ['blockQuote', 'insertTable', 'undo', 'redo'],
+#         ],
+#     }
+# }
+
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload'],
+        }
+    },
+    'extends': {  # ❗ BU NOM AYNAN SHU BO'LISHI KERAK
+        'toolbar': {
+            'items': ['heading', '|', 'bold', 'italic', 'link',
+                      'bulletedList', 'numberedList', 'blockQuote', 'imageUpload',
+                      'fontColor', 'fontBackgroundColor', 'insertTable']
+        },
+        # qo‘shimcha sozlamalar
+    }
+}
+
+# CK_EDITOR_5_UPLOAD_FILE_VIEW_NAME = "custom_upload_file"
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"  # Possible values: "staff", "authenticated", "any"
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin Panel",
+    "site_header": "Tesol boshqaruvi",
+    "site_brand": "Tesol",
+    "login_logo": "images/logo.png",
+    "site_icon": "images/favicon.ico",
+
+    "welcome_sign": "Xush kelibsiz, foydalanuvchi!",
+
+    "search_model": ["account.User"],
+
+    "topmenu_links": [
+        {"name": "Bosh sahifa", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"model": "account.User"},
+        # {"app": "news"},
+    ],
+
+    "usermenu_links": [
+        {"name": "Google", "url": "https://google.com", "new_window": True},
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "hide_apps": [],
+    "hide_models": [],
+
+    "order_with_respect_to": ["account", "app", "cours", "news", "tesol"],
+
+    "icons": {
+        "account": "fas fa-users-cog",
+        "account.User": "fas fa-user",
+        "auth.group": "fas fa-users",
+        "news.News": "fas fa-newspaper",
+        "news.About": "far fas fa-info-circle",
+        "tesol.About": "fas fa-info-circle",
+        "tesol.Teachers": "fas fa-chalkboard-teacher",
+        "tesol.Partners": "fas fa-handshake",
+        "tesol.Courses": "fas fa-book-reader",
+        "tesol.CourseType": "fas fa-tags",
+        "tesol.Settings": "fas fa-cogs",
+        "tesol.News": "fas fa-newspaper",
+    },
+
+    "default_icon_parents": "fas fa-folder-open",
+    "default_icon_children": "fas fa-circle",
+
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+
+    "show_ui_builder": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    # "dark_mode_theme": "darkly",
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-dark bg-primary",
+    "no_navbar_border": False,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_flat_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_child_hide_on_collapse": True,
+    "sidebar_nav_icon": "fas fa-circle",
+    "actions_sticky_top": True,
 }

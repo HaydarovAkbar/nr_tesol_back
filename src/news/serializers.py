@@ -1,24 +1,19 @@
 from rest_framework import serializers
-from . import models
+from .models import News, About
 
 
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.News
-        fields = ('uuid', 'title', 'content', 'published_at')
+        model = News
+        fields = ('uuid', 'title', 'content', 'image')
 
     def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        ret['images'] = NewsImageSerializer(models.NewsImage.objects.filter(news=instance), many=True).data
-        return ret
+        response = super(NewsSerializer, self).to_representation(instance)
+        response['published_at'] = instance.published_at.strftime('%Y-%m-%d %H:%M') if instance.published_at else None
+        return response
 
 
-class NewsImageSerializer(serializers.ModelSerializer):
+class AboutSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.NewsImage
-        fields = ('id',)
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        ret['image'] = instance.get_image_url()
-        return ret
+        model = About
+        fields = ('id', 'title', 'content', 'image')
