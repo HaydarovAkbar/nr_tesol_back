@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'tesol',
     # 'ckeditor',
     # 'ckeditor_uploader',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -277,3 +278,14 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_icon": "fas fa-circle",
     "actions_sticky_top": True,
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kamezukashidev@gmail.com'
+EMAIL_HOST_PASSWORD = 'WpI983w2|+Q3'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+FRONTEND_URL = 'https://your-frontend.uz'

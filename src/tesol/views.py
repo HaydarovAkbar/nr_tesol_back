@@ -1,9 +1,10 @@
 from rest_framework import viewsets
-from .models import News, About, Settings, Teachers, Partners, CourseType, Courses
+from .models import News, About, Settings, Teachers, Partners, CourseType, Courses, Accreditation
 from .serializers import (
     NewsSerializer, AboutSerializer, SettingsSerializer, TeachersSerializer,
-    PartnersSerializer, CourseTypeSerializer, CoursesSerializer
+    PartnersSerializer, CourseTypeSerializer, CoursesSerializer, AccreditationSerializer
 )
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,3 +41,10 @@ class CourseTypeViewSet(viewsets.ReadOnlyModelViewSet):
 class CoursesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Courses.objects.filter(is_active=True)
     serializer_class = CoursesSerializer
+    filter_backends = [DjangoFilterBackend, ]
+    filterset_fields = ['course_type', 'title']
+
+
+class AccreditationViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Accreditation.objects.filter(is_active=True)
+    serializer_class = AccreditationSerializer

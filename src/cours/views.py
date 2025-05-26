@@ -4,6 +4,7 @@ from .serializers import (
     TeachersSerializer,
     CourseTypeSerializer, CoursesSerializer
 )
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TeachersViewSet(viewsets.ReadOnlyModelViewSet):
@@ -19,3 +20,5 @@ class CourseTypeViewSet(viewsets.ReadOnlyModelViewSet):
 class CoursesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Courses.objects.filter(is_active=True)
     serializer_class = CoursesSerializer
+    filter_backends = [DjangoFilterBackend, ]
+    filterset_fields = ['course_type', 'title']

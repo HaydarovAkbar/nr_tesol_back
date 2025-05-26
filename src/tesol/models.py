@@ -156,3 +156,22 @@ class Courses(models.Model):
         verbose_name_plural = _('Courses')
         verbose_name = _('Courses')
         db_table = 'tesol_courses'
+
+
+class Accreditation(models.Model):
+    title = models.CharField(max_length=255, verbose_name=_("To'liq nomi [title]"))
+    content = models.TextField(verbose_name='Tarkibi [content]', null=True, blank=True)
+    image = models.ImageField(upload_to='accreditation', verbose_name='Rasm [image]', null=True, blank=True)
+
+    is_active = models.BooleanField(default=True, verbose_name='Holati [is_active]')
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = _('Accreditation')
+        verbose_name = _('Accreditation')
+        db_table = 'tesol_accreditations'
