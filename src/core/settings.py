@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'utils',
     'news',
     'tesol',
-    # 'ckeditor',
-    # 'ckeditor_uploader',
     'django_filters',
 ]
 
@@ -150,7 +148,8 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'https://8989-213-230-69-88.ngrok-free.app'
+HOST = 'https://b89f-213-230-69-88.ngrok-free.app'
+
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = [HOST]
@@ -284,8 +283,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kamezukashidev@gmail.com'
-EMAIL_HOST_PASSWORD = 'WpI983w2|+Q3'
+EMAIL_HOST_PASSWORD = 'otcibxgrfbcyjwqu'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-FRONTEND_URL = 'https://your-frontend.uz'
+FRONTEND_URL = 'https://b89f-213-230-69-88.ngrok-free.app'

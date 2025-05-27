@@ -4,7 +4,7 @@ from .views import (
     NewsViewSet
 )
 from utils.views import (
-    AboutViewSet, SettingsViewSet, PartnersViewSet
+    AboutViewSet, SettingsViewSet, PartnersViewSet, SolidFeatureViewSet, TestimonialsViewSet, DottedShapeViewSet
 )
 from cours.views import (
     TeachersViewSet, CourseTypeViewSet, CoursesViewSet
@@ -18,6 +18,9 @@ router.register(r'about', AboutViewSet)
 router.register(r'teachers', TeachersViewSet)
 router.register(r'courses', CoursesViewSet)
 router.register(r'course-type', CourseTypeViewSet)
+router.register(r'solid-feature', SolidFeatureViewSet)
+router.register(r'testimonials', TestimonialsViewSet)
+router.register(r'dotted-shape', DottedShapeViewSet)
 
 urlpatterns = [
     path('platform/', include(router.urls)),
