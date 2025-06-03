@@ -148,7 +148,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'https://b89f-213-230-69-88.ngrok-free.app'
+HOST = 'https://4f8d-213-230-69-88.ngrok-free.app'
 
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
