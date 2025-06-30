@@ -5,12 +5,14 @@ from .serializers import (
     PartnersSerializer, CourseTypeSerializer, CoursesSerializer, AccreditationSerializer
 )
 from django_filters.rest_framework import DjangoFilterBackend
+from utils.pagination.base import TenPagination
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = News.objects.filter(is_active=True).order_by('-created_at')
     serializer_class = NewsSerializer
     lookup_field = 'uuid'
+    pagination_class = TenPagination
 
 
 class AboutViewSet(viewsets.ReadOnlyModelViewSet):
