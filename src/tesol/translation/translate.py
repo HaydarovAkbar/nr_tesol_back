@@ -1,5 +1,5 @@
 from modeltranslation.translator import TranslationOptions, register
-from ..models import About, News, Partners, CourseType, Courses, Teachers, Accreditation
+from ..models import About, News, Partners, CourseType, Courses, Teachers, Accreditation, Services
 
 
 @register(About)
@@ -34,4 +34,9 @@ class TeachersTranslationOptions(TranslationOptions):
 
 @register(Accreditation)
 class AccreditationTranslationOptions(TranslationOptions):
+    fields = ('title', 'content')
+
+
+@register(Services)
+class ServicesTranslationOptions(TranslationOptions):
     fields = ('title', 'content')

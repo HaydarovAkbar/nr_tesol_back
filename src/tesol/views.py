@@ -1,8 +1,8 @@
 from rest_framework import viewsets
-from .models import News, About, Settings, Teachers, Partners, CourseType, Courses, Accreditation
+from .models import News, About, Settings, Teachers, Partners, CourseType, Courses, Accreditation, Services
 from .serializers import (
     NewsSerializer, AboutSerializer, SettingsSerializer, TeachersSerializer,
-    PartnersSerializer, CourseTypeSerializer, CoursesSerializer, AccreditationSerializer
+    PartnersSerializer, CourseTypeSerializer, CoursesSerializer, AccreditationSerializer, ServicesSerializer
 )
 from django_filters.rest_framework import DjangoFilterBackend
 from utils.pagination.base import TenPagination
@@ -26,7 +26,7 @@ class SettingsViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class TeachersViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Teachers.objects.filter(is_active=True)
+    queryset = Teachers.objects.filter(is_active=True).order_by('order')
     serializer_class = TeachersSerializer
 
 
@@ -41,7 +41,7 @@ class CourseTypeViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CoursesViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Courses.objects.filter(is_active=True)
+    queryset = Courses.objects.filter(is_active=True).order_by('order')
     serializer_class = CoursesSerializer
     filter_backends = [DjangoFilterBackend, ]
     filterset_fields = ['course_type', 'title']
@@ -50,3 +50,8 @@ class CoursesViewSet(viewsets.ReadOnlyModelViewSet):
 class AccreditationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Accreditation.objects.filter(is_active=True)
     serializer_class = AccreditationSerializer
+
+
+class ServicesViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Services.objects.filter(is_active=True)
+    serializer_class = ServicesSerializer

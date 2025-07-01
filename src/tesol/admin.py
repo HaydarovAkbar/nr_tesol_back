@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import About, News, Settings, Partners, CourseType, Courses, Teachers, Accreditation
+from .models import About, News, Settings, Partners, CourseType, Courses, Teachers, Accreditation, Services
 from django_ckeditor_5.widgets import CKEditor5Widget
 from django import forms
 
@@ -11,6 +11,16 @@ class CoursesAdminForm(forms.ModelForm):
 
     class Meta:
         model = Courses
+        fields = '__all__'
+
+
+class ServicesAdminForm(forms.ModelForm):
+    content_uz = forms.CharField(widget=CKEditor5Widget(config_name='extends'), required=False)
+    content_en = forms.CharField(widget=CKEditor5Widget(config_name='extends'), required=False)
+    content_ru = forms.CharField(widget=CKEditor5Widget(config_name='extends'), required=False)
+
+    class Meta:
+        model = Services
         fields = '__all__'
 
 
@@ -109,7 +119,7 @@ class TeachersAdmin(admin.ModelAdmin):
         ('O\'zbekcha', {'fields': ('about_uz', 'position_uz',)}),
         ('Inglizcha', {'fields': ('about_en', 'position_en',)}),
         ('Ruscha', {'fields': ('about_ru', 'position_ru',)}),
-        ('Boshqalar', {'fields': ('fullname', 'avatar', 'is_boss', 'is_staff', 'is_active')}),
+        ('Boshqalar', {'fields': ('fullname', 'avatar', 'is_boss', 'is_staff', 'is_active', 'order')}),
     )
 
 
@@ -159,3 +169,16 @@ class PartnersAdmin(admin.ModelAdmin):
         ('Boshqalar', {'fields': ('logo', 'is_active')}),
     )
     form = PartnersAdminForm
+
+
+@admin.register(Services)
+class ServicesAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'created_at')
+    form = ServicesAdminForm
+
+    fieldsets = (
+        ('O\'zbekcha', {'fields': ('title_uz', 'content_uz',)}),
+        ('Inglizcha', {'fields': ('title_en', 'content_en',)}),
+        ('Ruscha', {'fields': ('title_ru', 'content_ru',)}),
+        ('Boshqalar', {'fields': ('image', 'is_active')}),
+    )

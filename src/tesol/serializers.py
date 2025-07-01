@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import News, About, Settings, Teachers, Partners, CourseType, Courses, Accreditation
+from .models import News, About, Settings, Teachers, Partners, CourseType, Courses, Accreditation, Services
 
 
 class NewsSerializer(serializers.ModelSerializer):
@@ -57,4 +57,10 @@ class CoursesSerializer(serializers.ModelSerializer):
 class AccreditationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accreditation
+        fields = ('id', 'title', 'content', 'image')
+
+
+class ServicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Services
         fields = ('id', 'title', 'content', 'image')

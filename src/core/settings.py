@@ -241,9 +241,17 @@ JAZZMIN_SETTINGS = {
         "tesol.Teachers": "fas fa-chalkboard-teacher",
         "tesol.Partners": "fas fa-handshake",
         "tesol.Courses": "fas fa-book-reader",
+        "tesol.Services": "fas fa-concierge-bell",
+        "tesol.Accreditation": "fas fa-certificate",
         "tesol.CourseType": "fas fa-tags",
         "tesol.Settings": "fas fa-cogs",
         "tesol.News": "fas fa-newspaper",
+        "utils.About": "fas fa-info-circle",
+        "utils.Settings": "fas fa-cogs",
+        "cours.CourseType": "fas fa-tags",
+        "cours.Courses": "fas fa-book-reader",
+        # "cours.CoursesTeachers": "fas fa-chalkboard-teacher",
+
     },
 
     "default_icon_parents": "fas fa-folder-open",
@@ -277,7 +285,6 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_icon": "fas fa-circle",
     "actions_sticky_top": True,
 }
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

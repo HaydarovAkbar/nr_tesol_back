@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import (
     NewsViewSet, AboutViewSet, SettingsViewSet,
-    TeachersViewSet, PartnersViewSet, CourseTypeViewSet, CoursesViewSet, AccreditationViewSet
+    TeachersViewSet, PartnersViewSet, CourseTypeViewSet, CoursesViewSet, AccreditationViewSet, ServicesViewSet
 )
 
 router = DefaultRouter()
@@ -14,6 +14,7 @@ router.register(r'partners', PartnersViewSet)
 router.register(r'course-types', CourseTypeViewSet)
 router.register(r'courses', CoursesViewSet)
 router.register(r'accreditation', AccreditationViewSet)
+router.register(r'services', ServicesViewSet)
 
 urlpatterns = [
     path('tesol/', include(router.urls)),

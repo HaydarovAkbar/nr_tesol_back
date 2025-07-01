@@ -11,17 +11,17 @@ from cours.views import (
 )
 
 router = DefaultRouter()
-router.register(r'platform-news', NewsViewSet)
-router.register(r'platform-settings', SettingsViewSet)
-router.register(r'platform-partners', PartnersViewSet)
-router.register(r'platform-about', AboutViewSet)
-router.register(r'platform-teachers', TeachersViewSet)
-router.register(r'platform-courses', CoursesViewSet)
-router.register(r'platform-course-type', CourseTypeViewSet)
-router.register(r'platform-solid-feature', SolidFeatureViewSet)
-router.register(r'platform-testimonials', TestimonialsViewSet)
-router.register(r'platform-dotted-shape', DottedShapeViewSet)
-router.register(r'platform-faq', FaqViewSet)
+router.register(r'PlatformNews', NewsViewSet)
+router.register(r'PlatformSettings', SettingsViewSet)
+router.register(r'PlatformPartners', PartnersViewSet)
+router.register(r'PlatformAbout', AboutViewSet)
+router.register(r'PlatformTeacher', TeachersViewSet)
+router.register(r'PlatformCourses', CoursesViewSet)
+router.register(r'PlatformCourseType', CourseTypeViewSet)
+router.register(r'PlatformSolidFeature', SolidFeatureViewSet)
+router.register(r'PlatformTestimonials', TestimonialsViewSet)
+router.register(r'PlatformDottedShape', DottedShapeViewSet)
+router.register(r'PlatformFAQ', FaqViewSet)
 
 urlpatterns = [
     path('platform/', include(router.urls)),

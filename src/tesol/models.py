@@ -89,6 +89,8 @@ class Teachers(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
+    order = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqami [order]"))
+
     def __str__(self):
         return self.fullname
 
@@ -149,6 +151,8 @@ class Courses(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
+    order = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqami [order]"))
+
     def __str__(self):
         return self.title
 
@@ -175,3 +179,22 @@ class Accreditation(models.Model):
         verbose_name_plural = _('Accreditation')
         verbose_name = _('Accreditation')
         db_table = 'tesol_accreditations'
+
+
+class Services(models.Model):
+    title = models.CharField(max_length=255, verbose_name=_("To'liq nomi [title]"))
+    content = models.TextField(verbose_name='Tarkibi [content]', null=True, blank=True)
+    image = models.ImageField(upload_to='services', verbose_name='Rasm [image]', null=True, blank=True)
+
+    is_active = models.BooleanField(default=True, verbose_name='Holati [is_active]')
+
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = _('Services')
+        verbose_name = _('Services')
+        db_table = 'tesol_services'
