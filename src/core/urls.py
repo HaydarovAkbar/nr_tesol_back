@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
-from tesol.urls import urlpatterns as tesol_urls
-from news.urls import urlpatterns as news_urls
-from account.urls import urlpatterns as account_urls
 from django.conf.urls.static import static
 from django.conf import settings
 
+from tesol.urls import urlpatterns as tesol_urls
+from news.urls import urlpatterns as news_urls
+from account.urls import urlpatterns as account_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path("ckeditor/", include("ckeditor_uploader.urls")),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
 ]
 

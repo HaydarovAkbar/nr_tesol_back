@@ -172,16 +172,6 @@ SIMPLE_JWT = {
     "SIGNING_KEY": SECRET_KEY,
 }
 
-# CKEDITOR_5_CONFIGS = {
-#     'default': {
-#         'toolbar': [
-#             ['heading', '|', 'bold', 'italic', 'link'],
-#             ['bulletedList', 'numberedList', '|', 'outdent', 'indent'],
-#             ['blockQuote', 'insertTable', 'undo', 'redo'],
-#         ],
-#     }
-# }
-
 CKEDITOR_5_CONFIGS = {
     'default': {
         'toolbar': {
@@ -193,7 +183,8 @@ CKEDITOR_5_CONFIGS = {
         'toolbar': {
             'items': ['heading', '|', 'bold', 'italic', 'link',
                       'bulletedList', 'numberedList', 'blockQuote', 'imageUpload',
-                      'fontColor', 'fontBackgroundColor', 'insertTable']
+                      'fontColor', 'fontBackgroundColor', 'insertTable', 'undo', 'redo',
+                      'mediaEmbed', 'horizontalLine', 'codeBlock', 'code', 'removeFormat'],
         },
         # qo‘shimcha sozlamalar
     }
@@ -215,13 +206,14 @@ JAZZMIN_SETTINGS = {
 
     "topmenu_links": [
         {"name": "Bosh sahifa", "url": "admin:index", "permissions": ["auth.view_user"]},
-        {"model": "account.User"},
-        # {"app": "news"},
-    ],
+        # {"model": "account.User"},
 
-    "usermenu_links": [
-        {"name": "Google", "url": "https://google.com", "new_window": True},
     ],
+    "usermenu_links": [
+        {"name": "Tesol", "url": "https://tesol.international", "new_window": True},
+        {"name": "Nr Hub", "url": "https://nrvisionhub.com/", "new_window": True},
+    ],
+    "custom_js": "admin/js/language_switcher.js",
 
     "show_sidebar": True,
     "navigation_expanded": True,
@@ -229,7 +221,7 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
     "hide_models": [],
 
-    "order_with_respect_to": ["account", "app", "cours", "news", "tesol"],
+    "order_with_respect_to": ["account", "app", "cours", "news", "tesol", "gallery"],
 
     "icons": {
         "account": "fas fa-users-cog",
@@ -246,6 +238,9 @@ JAZZMIN_SETTINGS = {
         "tesol.CourseType": "fas fa-tags",
         "tesol.Settings": "fas fa-cogs",
         "tesol.News": "fas fa-newspaper",
+        "tesol.Gallery": "fas fa-images",
+        "tesol.GalleryCategory": "fas fa-folder-open",
+        "tesol.GalleryView": "fas fa-eye",
         "utils.About": "fas fa-info-circle",
         "utils.Settings": "fas fa-cogs",
         "cours.CourseType": "fas fa-tags",
@@ -259,7 +254,7 @@ JAZZMIN_SETTINGS = {
 
     "related_modal_active": False,
     "custom_css": None,
-    "custom_js": None,
+    # "custom_js": None,
 
     "show_ui_builder": False,
 }
