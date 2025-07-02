@@ -105,7 +105,6 @@ class GalleryListView(generics.ListAPIView):
 
 
 class GalleryDetailView(generics.RetrieveAPIView):
-    """Gallery elementi detali"""
     serializer_class = GalleryDetailSerializer
     lookup_field = 'uuid'
 
