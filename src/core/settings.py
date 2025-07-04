@@ -148,7 +148,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-HOST = 'https://4f8d-213-230-69-88.ngrok-free.app'
+HOST = 'https://api.nrvisionhub.com/'
 
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
@@ -197,7 +197,7 @@ JAZZMIN_SETTINGS = {
     "site_title": "Admin Panel",
     "site_header": "Tesol boshqaruvi",
     "site_brand": "Tesol",
-    "login_logo": "images/logo.png",
+    # "login_logo": "images/logo.png",
     "site_icon": "images/favicon.ico",
 
     "welcome_sign": "Xush kelibsiz, foydalanuvchi!",
@@ -285,8 +285,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kamezukashidev@gmail.com'
-EMAIL_HOST_PASSWORD = 'otcibxgrfbcyjwqu'
+EMAIL_HOST_PASSWORD = 'echjbyxelmmqdtjm'   # otcibxgrfbcyjwqua
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-FRONTEND_URL = 'https://b89f-213-230-69-88.ngrok-free.app'
+FRONTEND_URL = 'https://nrvisionhub.com'
