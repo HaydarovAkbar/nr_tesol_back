@@ -1,6 +1,16 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator
+from django.db.models.signals import post_save, pre_delete
+from django.dispatch import receiver
+from django.core.exceptions import ValidationError
+import uuid
+import os
+from decimal import Decimal
+
+User = get_user_model()
 
 
 class LanguageManager(models.Manager):
@@ -150,3 +160,67 @@ class DottedShape(models.Model):
         verbose_name_plural = _('Dotted Shape')
         verbose_name = _('Dotted Shape')
         db_table = 'dotted_shape'
+
+
+# Faol elementlar uchun umumiy manager
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
+# Nashr etilgan kurslar uchun
+class PublishedCourseManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            is_active=True,
+            is_published=True,
+            published_at__lte=timezone.now()
+        )
+
+
+# User progress uchun
+class ProgressManager(models.Manager):
+    def completed(self):
+        return self.filter(status='completed')
+
+    def in_progress(self):
+        return self.filter(status='in_progress')
+
+
+class TimestampedModel(models.Model):
+    """Vaqt maydonlari uchun abstract model"""
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Yaratilgan sana"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Yangilangan sana"))
+
+    class Meta:
+        abstract = True
+
+
+class StatusModel(models.Model):
+    """Holat maydonlari uchun abstract model"""
+    is_active = models.BooleanField(default=True, verbose_name=_("Faol"))
+
+    class Meta:
+        abstract = True
+
+
+class OrderedModel(models.Model):
+    """Tartib uchun abstract model"""
+    order = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqami"))
+
+    class Meta:
+        abstract = True
+        ordering = ['order']
+
+
+class UUIDModel(models.Model):
+    """UUID uchun abstract model"""
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        verbose_name=_("UUID")
+    )
+
+    class Meta:
+        abstract = True

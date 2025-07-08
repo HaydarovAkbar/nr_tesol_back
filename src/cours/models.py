@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from .utils.models import ActiveManager
 
 
 class Teachers(models.Model):
@@ -28,11 +29,15 @@ class CourseType(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("To'liq nomi [title]"))
     attr = models.CharField(max_length=255, verbose_name=_("To'liq nomi [attr]"))
     image = models.ImageField(upload_to='course_types', verbose_name='Rasm [image]', null=True, blank=True)
-
+    slug = models.SlugField(max_length=255, unique=True, verbose_name=_("URL slug"))
+    color = models.CharField(max_length=7, default="#007bff", verbose_name=_("Rang kodi"))
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
     is_active = models.BooleanField(default=True, verbose_name='Holati [is_active]')
+
+    objects = models.Manager()
+    active_objects = ActiveManager()
 
     def __str__(self):
         return self.title
