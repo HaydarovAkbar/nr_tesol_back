@@ -9,6 +9,9 @@ from utils.views import (
 from cours.views import (
     TeachersViewSet, CourseTypeViewSet, CoursesViewSet
 )
+from app.views import (
+    PlannersViewSet
+)
 
 router = DefaultRouter()
 router.register(r'PlatformNews', NewsViewSet)
@@ -22,6 +25,7 @@ router.register(r'PlatformSolidFeature', SolidFeatureViewSet)
 router.register(r'PlatformTestimonials', TestimonialsViewSet)
 router.register(r'PlatformDottedShape', DottedShapeViewSet)
 router.register(r'PlatformFAQ', FaqViewSet)
+router.register(r'PlatformPlanners', PlannersViewSet)
 
 urlpatterns = [
     path('platform/', include(router.urls)),

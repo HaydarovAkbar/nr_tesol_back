@@ -33,12 +33,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'whitenoise',
 
+    'app',
     'account',
     'cours',
     'utils',
     'news',
     'tesol',
     'django_filters',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,7 @@ MODELTRANSLATION_TRANSLATION_FILES = (
     'utils.translation.translate',
     'news.translation.translate',
     'tesol.translation.translate',
+    'app.translation.translate',
 )
 
 LANGUAGE_CODE = 'en-us'
@@ -155,6 +158,7 @@ CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = [HOST]
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
@@ -282,12 +286,26 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'kamezukashidev@gmail.com'
-EMAIL_HOST_PASSWORD = 'echjbyxelmmqdtjm'   # otcibxgrfbcyjwqua
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 2525  # (587 ishlamasa)
+EMAIL_HOST_USER = '919120002@smtp-brevo.com'  # O‘zgarmas texnik login
+EMAIL_HOST_PASSWORD = 'xsmtpsib-56b104520aa8b1fb3619c804caa16031ff79706b32690346138a7ca2fa69bc74-SjwaGEOQdrqFcCRn'  # Siz yaratgan SMTP key
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = 'info@nrvisionhub.com'  # Sizning domen emailingiz
 
 FRONTEND_URL = 'https://nrvisionhub.com'
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TESOL API',
+    'DESCRIPTION': 'TESOL loyihasi uchun API documentation',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # Swagger UI konfiguratsiyasi
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+        'displayOperationId': True,
+    },
+    # Schema konfiguratsiyasi
+    'COMPONENT_SPLIT_REQUEST': True
+}

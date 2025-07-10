@@ -6,7 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 import uuid
 
-from utils.models import Language
+# from utils.models import Language
 
 
 class User(AbstractUser):
@@ -22,7 +22,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
-    language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
+    language = models.ForeignKey('utils.Language', on_delete=models.SET_NULL, null=True)
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
