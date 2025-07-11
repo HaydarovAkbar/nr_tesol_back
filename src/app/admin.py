@@ -14,17 +14,6 @@ class PlannersAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
-# @admin.register(Planners)
-# class PlannersAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'created_at', 'updated_at', 'is_active')
-#     search_fields = ('title',)
-#     list_filter = ('created_at', 'updated_at')
-#     ordering = ('-created_at',)
-#
-#     # def has_add_permission(self, request):
-#     #     return False
-
-
 @admin.register(Planners)
 class PlannersAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at', 'updated_at', 'is_active')
